@@ -10,6 +10,10 @@
 
 ### Bug Fixes and Minor Changes
 
+  * `XMonad.Hooks.EwmhDesktops.fullscreenEventHook`
+  
+    - Remove borders when fullscreen.
+
   * `XMonad.Actions.GridSelect`
 
     - The vertical centring of text in each cell has been improved.

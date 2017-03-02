@@ -188,9 +188,12 @@ fullscreenEventHook (ClientMessageEvent _ _ _ dpy win typ (action:dats)) = do
   when (typ == wmstate && fi fullsc `elem` dats) $ do
     when (action == add || (action == toggle && not isFull)) $ do
       chWstate (fi fullsc:)
+      io $ setWindowBorderWidth dpy win 0
       windows $ W.float win $ W.RationalRect 0 0 1 1
     when (action == remove || (action == toggle && isFull)) $ do
       chWstate $ delete (fi fullsc)
+      bw <- asks (borderWidth . config)
+      io $ setWindowBorderWidth dpy win bw
       windows $ W.sink win
 
   return $ All True
