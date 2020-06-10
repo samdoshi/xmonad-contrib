@@ -129,7 +129,7 @@ instance LayoutModifier FullscreenFocus Window where
   pureModifier (FullscreenFocus frect fulls) rect (Just (W.Stack {W.focus = f})) list
      | f `elem` fulls = ((f, rect') : rest, Nothing)
      | otherwise = (list, Nothing)
-     where rest = filter (not . orP (== f) (R.supersetOf rect')) list
+     where rest = filter ((/= f) . fst) list
            rect' = scaleRationalRect rect frect
   pureModifier _ _ Nothing list = (list, Nothing)
 
